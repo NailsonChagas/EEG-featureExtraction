@@ -1,8 +1,12 @@
 # EEG-FeaturesExtraction
 
+## Version: 1.0
 Faz a leitura dos arquivos da base de dados de EEG da universidade de Bonn.
 Utilzia a biblioteca sfe (ainda não publicada) para extração de características da série tempora, do espectro de potência, do espectrograma e do biespectrograma nas bandas de frequência delta, theta, alpha, beta, gamma e do espectro inteiro.
 Armazena as características em arquivos CSV nas pasta features.
+
+## Version: 1.1
+Cria um CSV com todas as características juntas.
 
 ### Características extraídas
 

@@ -1,3 +1,4 @@
+import pandas as pd
 from Bispectrogram import Bispectrogram
 from PowerSpectrum import PowerSpectrum
 from Spectogram import Spectogram
@@ -57,3 +58,22 @@ bgFAlpha.to_csv('features/bispectrogramFeaturesAlpha.csv', index=False, header=T
 bgFBeta.to_csv('features/bispectrogramFeaturesBeta.csv', index=False, header=True, sep=';')
 bgFGamma.to_csv('features/bispectrogramFeaturesGamma.csv', index=False, header=True, sep=';')
 bgFEntire.to_csv('features/bispectrogramFeaturesEntire.csv', index=False, header=True, sep=';')
+
+# ***************************************************************************************************************************
+# Todas as características já estraídas
+
+pathAllFeatures = []
+pathAllFeatures.append("features/timeSeriesFeatures.csv")
+pathAllFeatures.append("features/powerSpectrumFeaturesAll.csv")
+pathAllFeatures.append("features/spectrogramFeaturesAll.csv")
+pathAllFeatures.append("features/bispectrogramFeaturesAll.csv")
+
+df = pd.read_csv(pathAllFeatures[0], sep=';')
+for i in range(len(pathAllFeatures)):
+    if i != 0:
+        df = pd.merge(df, pd.read_csv(pathAllFeatures[i], sep=';'), left_index=True, right_index=True)\
+            .drop('name_y', 1).rename(columns={'name_x': 'name'})\
+            .drop('class_y', 1)\
+            .rename(columns={'class_x': 'class'})
+# Salva o dataframe para simples verificação
+df.to_csv("features/allFeatures.csv", index=False, header=True, sep=';')
